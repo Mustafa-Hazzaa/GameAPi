@@ -6,14 +6,13 @@ namespace GameStore.Api.DTOs;
 public class CreateGameDto
 {
     [Required]
-    public string Title { get; set; }
+    public required string Title { get; set; }
 
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
-    [Required]
+
     public GameGenre Genre { get; set; }
 
-    [Required]
     public Platform Platform { get; set; }
 
     [Range(1900, 2100)]

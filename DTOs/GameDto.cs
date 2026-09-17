@@ -6,8 +6,8 @@ namespace GameStore.Api.DTOs;
 public class GameDto
 {
     public Guid Id { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
+    public required string Title { get; set; }
+    public string? Description { get; set; }
     public GameGenre Genre { get; set; }
     public Platform Platform { get; set; }
     public int ReleaseYear { get; set; }
