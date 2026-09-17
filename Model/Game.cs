@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using GameStore.Api.Enums;
 
+namespace GameStore.Api.Models;
 public class Game
 {
     public Guid Id { get; init; } = Guid.NewGuid();
@@ -20,4 +21,22 @@ public class Game
 
     public bool IsCompleted { get; set; }
 
+
+      public Game(
+        string title,
+        string description,
+        GameGenre genre,
+        Platform platform,
+        int releaseYear,
+        int rating,
+        bool isCompleted)
+    {
+        Title = title;
+        Description = description;
+        Genre = genre;
+        Platform = platform;
+        ReleaseYear = releaseYear;
+        Rating = rating;
+        IsCompleted = isCompleted;
+    }
 }
