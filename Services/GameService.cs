@@ -1,4 +1,5 @@
 using GameStore.Api.DTOs;
+using GameStore.Api.Enums;
 using GameStore.Api.Mappers;
 using GameStore.Api.Models;
 
@@ -6,7 +7,38 @@ namespace GameStore.Api.Services;
 
 public class GameService : IGameService
 {
-    private readonly List<Game> _games = new();
+    private readonly List<Game> _games = new()
+{
+    new Game(
+        "The Witcher 3",
+        "An open-world RPG.",
+        GameGenre.RPG,
+        Platform.PC,
+        2015,
+        5,
+        true
+    ),
+
+    new Game(
+        "Minecraft",
+        "A sandbox game about building and exploration.",
+        GameGenre.Adventure,
+        Platform.PC,
+        2011,
+        5,
+        false
+    ),
+
+    new Game(
+        "Assassin's Creed IV: Black Flag",
+        "An open-world pirate adventure.",
+        GameGenre.Action,
+        Platform.PC,
+        2013,
+        5,
+        true
+    )
+};
 
     public Task<List<GameDto>> GetAllAsync()
     {
