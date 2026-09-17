@@ -1,5 +1,6 @@
 using GameStore.Api.DTOs;
 using GameStore.Api.Enums;
+using GameStore.Api.Exceptions;
 using GameStore.Api.Mappers;
 using GameStore.Api.Models;
 
@@ -49,16 +50,16 @@ public class GameService : IGameService
         return Task.FromResult(games);
     }
 
-    public Task<GameDto?> GetByIdAsync(Guid id)
+    public Task<GameDto> GetByIdAsync(Guid id)
     {
         var game = _games.FirstOrDefault(game => game.Id == id);
 
         if (game == null)
-            return Task.FromResult<GameDto?>(null);
+            throw new GameNotFoundException(id);
 
         var dto = GameMapper.FromEntity(game);
 
-        return Task.FromResult<GameDto?>(dto);
+        return Task.FromResult<GameDto>(dto);
     }
 
     public Task<GameDto> CreateAsync(CreateGameDto dto)
@@ -77,8 +78,7 @@ public class GameService : IGameService
         var game = _games.FirstOrDefault(game => game.Id == id);
 
         if (game == null)
-            return Task.FromResult(false);
-
+            throw new GameNotFoundException(id);
         GameMapper.ApplyUpdate(game,dto);
 
         return Task.FromResult(true);
@@ -89,7 +89,7 @@ public class GameService : IGameService
         var game = _games.FirstOrDefault(game => game.Id == id);
 
         if (game == null)
-            return Task.FromResult(false);
+            throw new GameNotFoundException(id);
 
         _games.Remove(game);
 

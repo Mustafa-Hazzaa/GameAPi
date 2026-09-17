@@ -26,8 +26,6 @@ public class GamesController : ControllerBase
         public async Task<IActionResult> GetById([FromRoute]Guid id)
         {
             var game = await _gameService.GetByIdAsync(id);
-            if (game == null)
-                return NotFound();
             return Ok(game);
         }
 
@@ -43,8 +41,6 @@ public class GamesController : ControllerBase
         {
             var updated  = await _gameService.UpdateAsync(id , dto);
             
-            if (!updated)
-                return NotFound();
             return NoContent();
         }
 
@@ -52,9 +48,6 @@ public class GamesController : ControllerBase
         public async Task<IActionResult> Delete([FromRoute]Guid id)
         {
             var deleted  = await _gameService.DeleteAsync(id);
-            
-            if (!deleted)
-                return NotFound();
             return NoContent();
         }
 }
